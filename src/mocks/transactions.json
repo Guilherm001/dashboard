@@ -1,0 +1,42 @@
+[
+    {
+        "id": "1",
+        "date": "2023-10-01",
+        "description": "Salário",
+        "category": "Renda",
+        "type": "income",
+        "amount": 5000
+    },
+    {
+        "id": "2",
+        "date": "2023-10-02",
+        "description": "Aluguel",
+        "category": "Moradia",
+        "type": "expense",
+        "amount": 1200
+    },
+    {
+        "id": "3",
+        "date": "2023-10-03",
+        "description": "Supermercado",
+        "category": "Alimentação",
+        "type": "expense",
+        "amount": 300
+    },
+    {
+        "id": "4",
+        "date": "2023-10-04",
+        "description": "Conta de Luz",
+        "category": "Utilidades",
+        "type": "expense",
+        "amount": 150
+    },
+    {
+        "id": "5",
+        "date": "2023-10-05",
+        "description": "Venda de Produto X",
+        "category": "Renda Extra",
+        "type": "income",
+        "amount": 800
+    }
+]
