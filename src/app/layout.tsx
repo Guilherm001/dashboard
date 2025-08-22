@@ -1,6 +1,5 @@
 import "./globals.css";
 import { ReactNode } from "react";
-import { Providers } from "./providers";
 
 export const metadata = {
   title: "Dashboard Financeiro",
@@ -11,7 +10,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR">
       <body className="flex h-screen bg-gray-50 text-slate-900">
-        <Providers>
+        
         {/* Sidebar */}
         <aside className="w-64 bg-slate-900 shadow-lg p-4 flex flex-col">
           <h1 className="text-2xl font-bold mb-6 text-slate-200">💰 Dashboard</h1>
@@ -36,7 +35,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
           </section>
         </main>
-        </Providers>
+        
       </body>
     </html>
   );
