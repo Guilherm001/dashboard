@@ -30,7 +30,7 @@ export default function TransactionsPage() {
       {loading ? (
         <p>Carregando...</p>
       ) : (
-        <table className="min-w-full bg-white rounded shadow">
+        <table className="text-gray-900 min-w-full bg-white rounded shadow">
           <thead>
             <tr>
               <th className="py-2 px-4 border-b">Data</th>
