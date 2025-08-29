@@ -14,6 +14,7 @@ interface TransactionFilters {
   maxAmount?: number;
 }
 
+// GET - Buscar transações (com filtros)
 export async function GET(request: NextRequest) {
   try {
     // Extrair parâmetros de consulta da URL
@@ -54,8 +55,6 @@ export async function GET(request: NextRequest) {
     }
     
     if (filters.category) {
-      // CORREÇÃO: Aqui precisamos usar categoryId ou category.name
-      // Dependendo de como você quer filtrar
       where.category = {
         name: filters.category
       };
@@ -85,12 +84,11 @@ export async function GET(request: NextRequest) {
       }
     }
     
-    // CORREÇÃO PRINCIPAL: usar transaction no singular
     const transactions = await prisma.transaction.findMany({
       where,
       orderBy: { date: 'desc' },
       include: {
-        category: true // Incluir dados da categoria se necessário
+        category: true
       }
     });
     
@@ -103,3 +101,43 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+
+// POST - Criar nova transação
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    
+    // Validação básica
+    if (!body.description || !body.amount || !body.type || !body.date || !body.categoryId) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    const transaction = await prisma.transaction.create({
+      data: {
+        description: body.description,
+        amount: parseFloat(body.amount),
+        type: body.type,
+        date: new Date(body.date),
+        categoryId: parseInt(body.categoryId),
+        userId: 5 // ← ATENÇÃO: Você precisa ajustar isso!
+      },
+      include: {
+        category: true
+      }
+    });
+
+    return NextResponse.json(transaction, { status: 201 });
+  } catch (error) {
+    console.error('Error creating transaction:', error);
+    return NextResponse.json(
+      { error: 'Failed to create transaction' },
+      { status: 500 }
+    );
+  }
+}
+
+// PUT - Atualizar transação (precisa ser na rota dinâmica [id])
+// Isso fica em app/api/transactions/[id]/route.ts

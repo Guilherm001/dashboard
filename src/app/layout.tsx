@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <nav className="flex flex-col gap-4">
             <a href="/" className="hover:text-green-400 text-slate-200">Dashboard</a>
             <a href="/transactions" className="hover:text-green-400 text-slate-200">Transações</a>
-            <a href="/reports" className="hover:text-green-400 text-slate-200">Relatórios</a>
+            <a href="/transactions/manage" className="hover:text-green-400 text-slate-200">Relatórios</a>
             <a href="/settings" className="hover:text-green-400 text-slate-200">Configurações</a>
           </nav>
         </aside>
