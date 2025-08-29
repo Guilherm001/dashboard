@@ -44,5 +44,8 @@
     "workerDirectory": [
       "public"
     ]
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }

@@ -10,8 +10,14 @@ const OptionsChartLine = {
 
 const SeriesChartLine = [
   {
-    name: "Primeiro",
-    data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    name: "Entrada",
+
+    data: [23, 60, 30, 70, 40, 80, 53, 75, 88, 100]
+  },
+  {
+    name: "Gastos",
+    
+    data: [20, 45, 26, 60, 20, 30, 48, 48, 62, 80]
   }
 ];
 

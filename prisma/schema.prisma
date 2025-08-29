@@ -1,21 +1,69 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+// schema.prisma
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  email String  @unique
-  name  String
-  age   String?
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relações CORRIGIDAS - adicionar financialGoals
+  transactions   Transaction[]
+  categories     Category[]
+  financialGoals FinancialGoal[] // RELAÇÃO ADICIONADA AQUI
+}
+
+model Transaction {
+  id          Int      @id @default(autoincrement())
+  description String
+  amount      Float
+  type        String // 'income' ou 'expense'
+  date        DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relações
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String
+  type      String // 'income' ou 'expense'
+  color     String?
+  icon      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relações
+  userId       Int
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+}
+
+model FinancialGoal {
+  id            Int       @id @default(autoincrement())
+  title         String
+  targetAmount  Float
+  currentAmount Float     @default(0)
+  deadline      DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relações
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
